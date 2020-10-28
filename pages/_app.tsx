@@ -1,5 +1,6 @@
 import React from "react";
 import { reducer, initialState, State, Action } from "../reducers/rootReducer";
+import "../styles/Main.scss";
 
 const StoreContext = React.createContext<null | State>(null);
 const DispatchContext = React.createContext<null | React.Dispatch<Action>>(null);
