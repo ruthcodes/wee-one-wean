@@ -1,4 +1,6 @@
 import Head from 'next/head'
+import Page from '../components/shared/Page'
+import Header from '../components/shared/Header'
 
 export default function Home() {
   return (
@@ -7,23 +9,13 @@ export default function Home() {
         <title>Wee One Wean</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
-      <main>
-        <h1>
-          
-        </h1>
-
-        <p>
-          
-        </p>
-
-        <div>
+      <Page>
+        <div className="Index">
+          <Header/>
+          <p>Home</p>
         </div>
-      </main>
+      </Page>
 
-      <footer>
-  
-      </footer>
     </div>
   )
 }
