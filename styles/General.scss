@@ -1,5 +1,41 @@
+* {
+  background-repeat: no-repeat;
+  padding: 0px;
+  margin: 0px;
+  outline: none;
+}
+
 body {
   color: $Color2;
   font-family: $Font1;
   background: $Color1;
+}
+
+.Page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  height: 100%;
+  min-width: 320px;
+}
+
+.Main {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  border-top: 1px solid $Color3;
+  border-bottom: 1px solid $Color3;
+}
+
+.WidthPadding {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding-left: 60px;
+  padding-right: 60px;
+  position: relative;
+}
+
+.HeightPadding {
+  padding-top: 60px;
+  padding-bottom: 60px;
 }

@@ -1,6 +1,7 @@
 import React, { ReactElement, useEffect, useState } from "react";
 import { useStore, useDispatch } from "../../pages/_app";
 import Toast from "./Toast";
+import Header from "./Header";
 
 type Props = {
   children?: ReactElement;
@@ -15,13 +16,17 @@ const Page: React.FC<Props> = ({ children, title }) => {
 
   return (
     <>
-      <main>
+    <div className="Page">
+      <Header />
+      <main className="Main">
         {
           title && <h1>{title}</h1>
         }
         {children}
       </main>
-      <Toast message={toastMessage} visible={toastVisible} />
+    </div>
+      
+    {/*<Toast message={toastMessage} visible={toastVisible} />  */}
     </>
   )
 }

@@ -1,0 +1,59 @@
+/* General */
+
+@media only screen and (max-width:1200px) {
+  .WidthPadding {
+    padding-left: 50px;
+    padding-right: 50px;
+  }
+
+  .HeightPadding {
+    padding-top: 50px;
+    padding-bottom: 50px;
+  }
+}
+
+@media only screen and (max-width:1024px) {
+  .WidthPadding {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+
+  .HeightPadding {
+    padding-top: 40px;
+    padding-bottom: 40px;
+  }
+}
+
+@media only screen and (max-width:768px) {
+  .WidthPadding {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+}
+
+@media only screen and (max-width:480px) {
+  .WidthPadding {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+
+@media only screen and (max-width:360px) {
+  .WidthPadding {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}
+
+
+
+/* Header */
+
+@media only screen and (max-width:1024px) {
+  .HeaderContainer .ButtonsContainer .Icon {
+    height: 40px;
+    width: 40px;
+  }
+}
+
+

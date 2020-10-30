@@ -2,5 +2,12 @@ $Font1: 'Montserrat', sans-serif;
 
 $Color1: #ffffff; /* white */
 $Color2: #000000; /* black */
+$Color3: #EEEDEC; /* light grey */
+$Color4: #C6C4C2; /* medium grey */
+
+// Components
+@import "./Header.scss";
+
 
 @import "./General.scss";
+@import "./MediaQueries.scss";
