@@ -1,49 +1,25 @@
-export type State = {
-  toastVisible: boolean;
-  toastMessage: string;
-}
+import combineReducers from 'react-combine-reducers';
 
-const initialState: State = {
-  toastVisible: false,
-  toastMessage: ""
-}
+import { ToastState, initialToastState, ToastAction, toastReducer } from "./toastReducer";
+import { NavState, initialNavState, NavAction, navReducer } from "./navReducer";
 
-const SHOW_TOAST = "app/SHOW_TOAST";
-const HIDE_TOAST = "app/HIDE_TOAST";
-const SET_TOAST_MESSAGE = "app/SET_TOAST_MESSAGE";
+export type State = 
+{
+  toast: ToastState,
+  nav: NavState
+}
 
 export type Action = 
-  | {
-    type: typeof SHOW_TOAST;
-  }
-  | {
-    type: typeof HIDE_TOAST;
-  }
-  | {
-    type: typeof SET_TOAST_MESSAGE;
-  }
+  ToastAction & 
+  NavAction;
 
-const Reducer = (state = initialState, action: Action): State => {
-  switch(action.type) {
-    case SHOW_TOAST:
-      return {
-        ...state,
-        toastVisible: true
-      }
-    case HIDE_TOAST:
-      return {
-        ...state,
-        toastVisible: false
-      }
-    case SET_TOAST_MESSAGE:
-      return {
-        ...state,
-        toastMessage: action.payload
-      }
-      default:
-        return state;
-  }
-}
+type Reducer = (state: State, action: Action) => State;
+
+const [reducer, initialState] = combineReducers<Reducer>({
+  toast:    [toastReducer, initialToastState],
+  nav:      [navReducer, initialNavState]
+});
+
 
 export { initialState }
-export { Reducer as reducer }
+export { reducer }
