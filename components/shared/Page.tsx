@@ -1,7 +1,10 @@
 import React, { ReactElement, useEffect, useState } from "react";
+import Router from "next/router";
 import { useStore, useDispatch } from "../../pages/_app";
-import Toast from "./Toast";
+//import Toast from "./Toast";
 import Header from "./Header";
+import cancel from "../../assets/cancel.svg";
+import Navigation from "./Navigation";
 
 type Props = {
   children?: ReactElement;
@@ -10,12 +13,25 @@ type Props = {
 
 const Page: React.FC<Props> = ({ children, title }) => {
   const {
-    toast,
+    //toast,
     nav
   } = useStore();
 
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    const handleRouteChange = (url: string) => {
+      if (nav.navOpen) {
+        dispatch({ type: "app/TOGGLE_NAV"})
+      }
+
+    }
+
+    Router.events.on('routeChangeStart', handleRouteChange)
+    return () => {
+      Router.events.off('routeChangeStart', handleRouteChange)
+    }
+  }, [nav.navOpen])
 
   return (
     <>
@@ -39,7 +55,10 @@ const Page: React.FC<Props> = ({ children, title }) => {
           }}>
       </div>
       <div className={`SlidePanel ${nav.navOpen ? 'Open' : ''}`}>
-
+        <div className="Cancel" onClick={() => dispatch({ type: "app/TOGGLE_NAV"})}>
+          <img src={cancel} className="Icon" alt="Cancel" />
+        </div>
+        <Navigation />
       </div>
           
  

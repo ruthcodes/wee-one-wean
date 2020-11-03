@@ -40,6 +40,13 @@ body {
   padding-bottom: 60px;
 }
 
+.Icon {
+  height: 50px;
+  width: 50px;
+  padding: 10px;
+  cursor: pointer;
+}
+
 .BodyOverlay {
   display: none;
   background: $Color2;
@@ -71,10 +78,18 @@ body {
   overflow-x: hidden;
   display: flex;
   flex-direction: column;
-  padding: 40px 30px;
+  padding: 20px 20px 40px 30px;
   box-sizing: border-box;
 
   &.Open {
     left: 0;
+  }
+
+  .Cancel {
+    margin-left: auto;
+
+    .Icon {
+      padding: 0;
+    }
   }
 }
