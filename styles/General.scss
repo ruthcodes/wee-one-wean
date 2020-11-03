@@ -39,3 +39,42 @@ body {
   padding-top: 60px;
   padding-bottom: 60px;
 }
+
+.BodyOverlay {
+  display: none;
+  background: $Color2;
+  opacity: 0;
+  position: fixed;
+  right: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 999;
+  transition: opacity 300ms ease;
+
+  &.Visible {
+    opacity: .7;
+    display: block;
+  }
+}
+
+.SlidePanel {
+  width: 240px;
+  background-color: $Color1;
+  position: fixed;
+  top: 0px;
+  bottom: 0px;
+  left: -240px;
+  transition: left 400ms ease 0ms;
+  z-index: 1000;
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  padding: 40px 30px;
+  box-sizing: border-box;
+
+  &.Open {
+    left: 0;
+  }
+}

@@ -10,7 +10,7 @@ export type State =
 }
 
 export type Action = 
-  ToastAction & 
+  ToastAction | 
   NavAction;
 
 type Reducer = (state: State, action: Action) => State;

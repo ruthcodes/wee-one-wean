@@ -10,9 +10,12 @@ type Props = {
 
 const Page: React.FC<Props> = ({ children, title }) => {
   const {
-    toastVisible,
-    toastMessage
+    toast,
+    nav
   } = useStore();
+
+  const dispatch = useDispatch();
+
 
   return (
     <>
@@ -24,9 +27,25 @@ const Page: React.FC<Props> = ({ children, title }) => {
         }
         {children}
       </main>
+
+      <div
+          className={`BodyOverlay ${nav.navOpen ? 'Visible' : ''}`}
+          onClick={() => {
+            if (nav.navOpen) {
+              dispatch({
+                type: "app/TOGGLE_NAV"
+              })
+            }
+          }}>
+      </div>
+      <div className={`SlidePanel ${nav.navOpen ? 'Open' : ''}`}>
+
+      </div>
+          
+ 
     </div>
       
-    {/*<Toast message={toastMessage} visible={toastVisible} />  */}
+    {/*<Toast message={toast.toastMessage} visible={toast.toastVisible} />  */}
     </>
   )
 }
