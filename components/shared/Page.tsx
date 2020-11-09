@@ -56,7 +56,7 @@ const Page: React.FC<Props> = ({ children, title }) => {
       </div>
       <div className={`SlidePanel ${nav.navOpen ? 'Open' : ''}`}>
         <div className="Cancel" onClick={() => dispatch({ type: "app/TOGGLE_NAV"})}>
-          <img src={cancel} className="Icon" alt="Cancel" />
+          <img src={cancel} className="Close" alt="Cancel" />
         </div>
         <Navigation />
       </div>

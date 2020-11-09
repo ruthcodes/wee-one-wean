@@ -23,7 +23,6 @@ body {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  border-top: 1px solid $Color3;
   border-bottom: 1px solid $Color3;
 }
 
@@ -88,8 +87,10 @@ body {
   .Cancel {
     margin-left: auto;
 
-    .Icon {
+    .Close {
       padding: 0;
+      height: 20px;
+      width: 20px;
     }
   }
 }
