@@ -1,0 +1,41 @@
+.Form {
+  width: 360px;
+  display: flex;
+  flex-flow: column nowrap;
+  
+  .FormField {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+
+    .FormLabel {
+      display: flex;
+      align-items: center;
+      width: 60px;
+      flex-grow: 1;
+      text-transform: capitalize;
+      letter-spacing: .1em;
+    }
+
+    .FormInput {
+      flex-grow :3;
+      height: 30px;
+      background-color: $Color5;
+      border: 1px solid $Color3;
+      border-radius: 1px;
+      font-size: 1em;
+      padding: 5px;
+    }
+  }
+
+  .BtnSubmit {
+    background: $Color6;
+    color: $Color1;
+    border-radius: 15px;
+    border: none;
+    padding: 10px;
+    font-size: 1em;
+    letter-spacing: .1em;
+    margin-top: 20px;
+  }
+}

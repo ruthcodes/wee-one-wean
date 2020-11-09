@@ -56,4 +56,23 @@
   }
 }
 
+/* Forms */
 
+
+@media only screen and (max-width:480px) {
+  .Form {
+    width: 100%;
+    min-width: 300px;
+    
+    .FormField { 
+      flex-direction: column;
+      width: 100%;
+  
+      .FormLabel {
+        margin-bottom: 10px;
+      }
+
+    }
+
+  }
+}

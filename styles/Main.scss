@@ -4,10 +4,13 @@ $Color1: #ffffff; /* white */
 $Color2: #000000; /* black */
 $Color3: #EEEDEC; /* light grey */
 $Color4: #C6C4C2; /* medium grey */
+$Color5: #f5f8fa; /* very light grey */
+$Color6: #6ab734; /* green */
 
 // Components
 @import "./Header.scss";
 @import "./Navigation.scss";
+@import "./Forms.scss";
 
 // Pages
 @import "./Add.scss";

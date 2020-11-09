@@ -9,7 +9,7 @@ function Input<T>(props: FieldAttributes<T>) {
     <input 
       {...(field as any)}
       {...props} 
-      className={`InputBox ${error ? 'InputError' : ''}`} 
+      className={`FormInput ${error ? 'InputError' : ''}`} 
     />
   )
 }
@@ -27,7 +27,7 @@ const TextInput = function ({
 } : TextInputProps) {
   return (
     <div className="FormField">
-      <label className="FormLabel">{label}</label>
+      <label className="FormLabel">{label}:</label>
       <Input name={field} />
     </div>
   )

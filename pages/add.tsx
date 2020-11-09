@@ -73,13 +73,14 @@ const MealForm: React.FC<Props> = () => {
           validationSchema={validationSchema}
         >
           {({isSubmitting}) => (
-            <Form>
+            <Form className="Form">
               {
                 fieldGenerator(initialValues).map((field: string, i: number) => (
                   <TextInput key={i} field={field} label={field} required/>
                 ))
               }
               <button
+                className="BtnSubmit"
                 type="submit"
                 disabled={isSubmitting}
               >Add</button>
