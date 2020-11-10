@@ -6,11 +6,15 @@ function Input<T>(props: FieldAttributes<T>) {
   const error = meta.touched && meta.error;
 
   return (
-    <input 
-      {...(field as any)}
-      {...props} 
-      className={`FormInput ${error ? 'InputError' : ''}`} 
-    />
+    <div className="FormInputContainer">
+      <input 
+        {...(field as any)}
+        {...props} 
+        className={`FormInput ${error ? 'InputError' : ''}`} 
+      />
+      {error && <div className="ErrorMsg">{meta.error}</div>}
+    </div>
+    
   )
 }
 
