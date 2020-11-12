@@ -8,9 +8,10 @@ import { useDispatch } from "./_app";
 import { useRouter } from "next/router";
 import { TextInput } from "../components/formFields/TextInput";
 import { MealDetails } from "../reducers/mealReducer";
+import { FormFieldObject } from "../components/types/forms";
+import { DateInput } from "../components/formFields/DateInput";
 
 type Props = {}
-
 
 const MealForm: React.FC<Props> = () => {
   const dispatch = useDispatch();
@@ -47,6 +48,45 @@ const MealForm: React.FC<Props> = () => {
     notes: ""
   }
 
+  const formFields: FormFieldObject[] = [
+    {
+      field: "date",
+      label: "Date",
+      type: "date",
+      required: true
+    },
+    {
+      field: "time",
+      label: "Time",
+      type: "time",
+      required: true
+    },
+    {
+      field: "meal",
+      label: "Meal",
+      type: "text",
+      required: true
+    },
+    {
+      field: "food",
+      label: "Food",
+      type: "text",
+      required: false
+    },
+    {
+      field: "drink",
+      label: "Drink",
+      type: "text",
+      required: false
+    },
+    {
+      field: "notes",
+      label: "Notes",
+      type: "text",
+      required: false
+    }
+  ]
+
   const handleSubmit = (
     payload: MealDetails
   ) => {
@@ -74,10 +114,15 @@ const MealForm: React.FC<Props> = () => {
         >
           {({isSubmitting}) => (
             <Form className="Form">
+              
               {
-                fieldGenerator(initialValues).map((field: string, i: number) => (
-                  <TextInput key={i} field={field} label={field} required/>
-                ))
+                formFields.map((field: FormFieldObject, i: number) => {
+                  if (field.type === "text"){
+                    return <TextInput key={i} field={field.field} label={field.label} required={field.required} />
+                  } else {
+                    return <DateInput key={i} field={field.field} label={field.label} time={field.type === "time" ? true : false} />
+                  }
+                })
               }
               <button
                 className="BtnSubmit"

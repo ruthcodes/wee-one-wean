@@ -1,5 +1,6 @@
 import React from "react";
 import { reducer, initialState, State, Action } from "../reducers/rootReducer";
+import "react-datetime/css/react-datetime.css";
 import "../styles/Main.scss";
 
 const StoreContext = React.createContext<null | State>(null);

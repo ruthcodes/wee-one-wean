@@ -1,22 +1,5 @@
 import React from "react";
-import { FieldAttributes, useField } from "formik";
-
-function Input<T>(props: FieldAttributes<T>) {
-  const [field, meta, helpers] = useField(props);
-  const error = meta.touched && meta.error;
-
-  return (
-    <div className="FormInputContainer">
-      <input 
-        {...(field as any)}
-        {...props} 
-        className={`FormInput ${error ? 'InputError' : ''}`} 
-      />
-      {error && <div className="ErrorMsg">{meta.error}</div>}
-    </div>
-    
-  )
-}
+import { FormikInput } from "./FormikInput";
 
 interface TextInputProps {
   field: string;
@@ -32,7 +15,7 @@ const TextInput = function ({
   return (
     <div className="FormField">
       <label className="FormLabel">{label}:</label>
-      <Input name={field} />
+      <FormikInput name={field} />
     </div>
   )
 }
