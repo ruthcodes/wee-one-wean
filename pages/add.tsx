@@ -2,7 +2,7 @@ import React from "react";
 import Head from 'next/head'
 import Page from '../components/shared/Page'
 
-import { Formik, Form } from "formik";
+import { Formik, Form, useFormikContext } from "formik";
 import * as Yup from "yup";
 import { useDispatch } from "./_app";
 import { useRouter } from "next/router";
@@ -10,13 +10,14 @@ import { TextInput } from "../components/formFields/TextInput";
 import { MealDetails } from "../reducers/mealReducer";
 import { FormFieldObject } from "../components/types/forms";
 import { DateInput } from "../components/formFields/DateInput";
+import { DropdownInput } from "../components/formFields/DropdownInput";
 
 type Props = {}
 
 const MealForm: React.FC<Props> = () => {
   const dispatch = useDispatch();
   const router = useRouter();
-
+  
   const validationSchema = Yup.object({
     date: Yup
       .string()
@@ -64,7 +65,13 @@ const MealForm: React.FC<Props> = () => {
     {
       field: "meal",
       label: "Meal",
-      type: "text",
+      type: "dropdown",
+      options: [
+        {value: "Breakfast", label: "Breakfast"}, 
+        {value: "Lunch", label: "Lunch"},
+        {value: "Dinner", label: "Dinner"},
+        {value: "Snack", label: "Snack"},
+      ],
       required: true
     },
     {
@@ -95,16 +102,6 @@ const MealForm: React.FC<Props> = () => {
     router.push("/")
   }
 
-  const fieldGenerator = function (mealDetailObj: MealDetails): string[] {
-    let fields = []
-    for (const field in mealDetailObj){
-      fields.push(field)
-    }
-    return fields;
-  }
-
-  
-
   return (
     <div className="WidthPadding HeightPadding">
       <Formik
@@ -112,15 +109,39 @@ const MealForm: React.FC<Props> = () => {
           onSubmit={handleSubmit}
           validationSchema={validationSchema}
         >
-          {({isSubmitting}) => (
+          {({isSubmitting, values}) => (
             <Form className="Form">
               
               {
                 formFields.map((field: FormFieldObject, i: number) => {
                   if (field.type === "text"){
-                    return <TextInput key={i} field={field.field} label={field.label} required={field.required} />
+                    return (
+                      <TextInput
+                        key={i} 
+                        field={field.field} 
+                        label={field.label} 
+                        required={field.required} 
+                       />
+                    )
+                  } else if (field.type === "dropdown") {
+                    return (
+                      <DropdownInput 
+                        key={i} 
+                        field={field.field} 
+                        label={field.label} 
+                        options={field.options} 
+                        time={values.time || new Date().toString()}
+                      />
+                    )
                   } else {
-                    return <DateInput key={i} field={field.field} label={field.label} time={field.type === "time" ? true : false} />
+                    return (
+                      <DateInput 
+                        key={i} 
+                        field={field.field} 
+                        label={field.label} 
+                        time={field.type === "time" ? true : false} 
+                      />
+                    )
                   }
                 })
               }
