@@ -2,6 +2,7 @@
   width: 360px;
   display: flex;
   flex-flow: column nowrap;
+  font-size: 1em;
   
   .FormField {
     display: flex;
@@ -15,12 +16,12 @@
       .FormInput {
         width: 100%;
         min-width: 255px;
-        height: 30px;
+        height: 38px;
         background-color: $Color5;
         border: 1px solid $Color3;
         border-radius: 3px;
         font-size: 1em;
-        padding: 5px;
+        padding: 5px 8px;
   
         &.InputError {
           border: 1px solid $Color7;
@@ -38,13 +39,22 @@
     .FormLabel {
       display: flex;
       align-items: flex-start;
-      padding-top: 5px;
+      padding-top: 13px;
       width: 60px;
       flex-grow: 1;
       text-transform: capitalize;
       letter-spacing: .1em;
+      font-size: 0.9em;
     }
 
+    .DropdownContainer {
+      min-width: 255px;
+      font-size: 0.9em;
+      .Dropdown__control {
+        background-color: $Color5;
+        border: 1px solid $Color3;
+      }
+    }
     
   }
 

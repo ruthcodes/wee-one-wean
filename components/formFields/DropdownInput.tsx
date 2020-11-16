@@ -46,9 +46,19 @@ const DropdownInput = function ({
       <div className="FormInputContainer">
         <Select
           defaultValue={guessedMeal()}
+          className={"DropdownContainer"}
+          classNamePrefix="Dropdown"
           isSearchable={false}
           options={options}
           onChange={(e) => formikContext.setFieldValue((field as any), e)}
+          theme={theme => ({
+            ...theme,
+            colors: {
+              ...theme.colors,
+              primary25: "#C6C4C2",
+              primary: "#6ab734",
+            },
+          })}
         />
       </div>
     </div>
