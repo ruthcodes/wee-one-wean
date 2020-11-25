@@ -11,6 +11,7 @@ import { MealDetails } from "../reducers/mealReducer";
 import { FormFieldObject } from "../components/types/forms";
 import { DateInput } from "../components/formFields/DateInput";
 import { DropdownInput } from "../components/formFields/DropdownInput";
+import { CheckboxInput } from "../components/formFields/CheckboxInput";
 
 type Props = {}
 
@@ -83,13 +84,17 @@ const MealForm: React.FC<Props> = () => {
     {
       field: "drink",
       label: "Drink",
-      type: "text",
+      type: "checkbox",
+      options: [
+        {value: "Water", label: "Water"},
+        {value: "Milk", label: "Milk"},
+      ],
       required: false
     },
     {
       field: "notes",
       label: "Notes",
-      type: "text",
+      type: "textarea",
       required: false
     }
   ]
@@ -114,13 +119,14 @@ const MealForm: React.FC<Props> = () => {
               
               {
                 formFields.map((field: FormFieldObject, i: number) => {
-                  if (field.type === "text"){
+                  if (field.type === "text" || field.type === "textarea"){
                     return (
                       <TextInput
                         key={i} 
                         field={field.field} 
                         label={field.label} 
-                        required={field.required} 
+                        required={field.required}
+                        type={field.type}
                        />
                     )
                   } else if (field.type === "dropdown") {
@@ -131,6 +137,15 @@ const MealForm: React.FC<Props> = () => {
                         label={field.label} 
                         options={field.options} 
                         time={values.time || new Date().toString()}
+                      />
+                    )
+                  } else if (field.type === "checkbox") {
+                    return (
+                      <CheckboxInput
+                        key={i} 
+                        field={field.field} 
+                        label={field.label} 
+                        options={field.options} 
                       />
                     )
                   } else {

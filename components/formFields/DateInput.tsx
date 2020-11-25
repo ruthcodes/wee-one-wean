@@ -17,9 +17,10 @@ const DateInput = function ({
 
   return (
     <div className="FormField">
-      <label className="FormLabel">{label}:</label>
+      <label className="FormLabel" htmlFor={field}>{label}:</label>
       <div className="FormInputContainer">
         <Datetime 
+          inputProps={{id: field}}
           className="FormInput" 
           timeFormat={time} 
           dateFormat={!time}

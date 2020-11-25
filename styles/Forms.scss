@@ -8,6 +8,7 @@
     display: flex;
     justify-content: space-between;
     margin-bottom: 5px;
+    //height: 50px;
 
     .FormInputContainer {
       flex-grow :3;
@@ -29,6 +30,12 @@
         }
       }
 
+      .FormInputArea {
+        height: 58px;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 0.85em;
+      }
+
       .ErrorMsg {
         font-size: 0.8em;
         color: $Color7;
@@ -41,6 +48,7 @@
       align-items: flex-start;
       padding-top: 13px;
       width: 60px;
+      max-width: 60px;
       flex-grow: 1;
       text-transform: capitalize;
       letter-spacing: .1em;
@@ -58,6 +66,11 @@
     
   }
 
+  .CheckboxFormField {
+    justify-content: unset;
+    //height: 80px;
+  }
+
   .BtnSubmit {
     background: $Color6;
     color: $Color1;
@@ -69,3 +82,76 @@
     margin-top: 20px;
   }
 }
+
+
+
+/* Hide default checkbox */
+[type="checkbox"] {
+  position: absolute;
+  z-index: -1;
+  opacity: 0;
+  height: auto;
+  width: auto;
+}
+
+/* Custom checkbox and label text */
+.CustomCheckbox {
+  display: flex;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+  padding-left: 30px;
+  height: 38px;
+  text-transform: capitalize;
+  letter-spacing: 0.1em;
+  font-size: 0.9em;
+}
+
+/* Custom checkbox default styles */
+.CustomCheckbox:before,
+.CustomCheckbox:after {
+  position: absolute;
+  top: 10px;
+  left: 0px;
+  transition: all 0.3s ease-out;
+  width: 18px;
+  height: 18px;
+}
+
+/* Checkbox box (unchecked state) */
+.CustomCheckbox:before {
+  content: "";
+  border-radius: 3px;
+  border: 1px solid $Color4;
+  background-color: $Color3;
+  box-sizing: border-box;
+}
+
+/* Checkbox tick (unchecked state) */
+.CustomCheckbox:after {
+  content: "";
+  text-align: center;
+  background-size: 20px;
+  background-position: 50%;
+}
+
+/* Checkbox box (checked state) */
+[type="checkbox"]:checked + .CustomCheckbox:before {
+  background: $Color6;
+  border: 1px solid $Color6;
+  content: "";
+}
+
+/* Checkbox tick (checked state) */
+[type="checkbox"]:checked + .CustomCheckbox:after {
+  transform: scale(0.5);
+  background-image: url("/Checked.png");
+  
+}
+
+/* Disabled checkbox */
+[type="checkbox"]:disabled + .CustomCheckbox {
+  opacity: 0.6;
+  cursor: default;
+}
+ 

@@ -47,14 +47,14 @@
 
 
 
-/* Header */
+/* Header 
 
 @media only screen and (max-width:1024px) {
   .Icon {
     height: 40px;
     width: 40px;
   }
-}
+}*/
 
 /* Forms */
 
@@ -67,6 +67,7 @@
     .FormField { 
       flex-direction: column;
       width: 100%;
+      margin-bottom: 0px;
   
       .FormLabel {
         margin-bottom: 10px;

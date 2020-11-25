@@ -42,9 +42,10 @@ const DropdownInput = function ({
 
   return (
     <div className="FormField">
-      <label className="FormLabel">{label}:</label>
+      <label className="FormLabel" htmlFor={field}>{label}:</label>
       <div className="FormInputContainer">
         <Select
+          inputId={field}
           defaultValue={guessedMeal()}
           className={"DropdownContainer"}
           classNamePrefix="Dropdown"
@@ -55,7 +56,8 @@ const DropdownInput = function ({
             ...theme,
             colors: {
               ...theme.colors,
-              primary25: "#C6C4C2",
+              primary50: "#C6C4C2",
+              primary25: "#EEEDEC",
               primary: "#6ab734",
             },
           })}
