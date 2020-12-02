@@ -12,6 +12,7 @@ import { FormFieldObject } from "../components/types/forms";
 import { DateInput } from "../components/formFields/DateInput";
 import { DropdownInput } from "../components/formFields/DropdownInput";
 import { CheckboxInput } from "../components/formFields/CheckboxInput";
+import { guessedMeal } from "../helpers";
 
 type Props = {}
 
@@ -21,34 +22,42 @@ const MealForm: React.FC<Props> = () => {
   
   const validationSchema = Yup.object({
     date: Yup
-      .string()
+      .date()
       .required("Please enter a date"),
     time: Yup
-      .string()
+      .date()
       .required("Please enter a time"),
     meal: Yup
-      .string()
+      .object()
+      .shape({
+        value: Yup.string(),
+        label: Yup.string()
+      })
       .required("Please choose a meal"),
-    // food: Yup
-    //   .array()
-    //   .of(Yup.string()),
     food: Yup
-      .string(),
+      .string()
+      .required("Please enter a food"),
     drink: Yup
-      .string(),
+      .object()
+      .shape({
+        milk: Yup.boolean(),
+        water: Yup.boolean()
+      }),
     notes: Yup
       .string()
   })
 
+
   const initialValues: MealDetails = {
-    date: "",
-    time: "",
-    meal: "",
-    // food: [],
+    date: new Date(),
+    time: new Date(),
+    meal: guessedMeal(new Date()),
     food: "",
-    drink: "",
+    drink: {milk: false, water: false},
     notes: ""
   }
+
+  
 
   const formFields: FormFieldObject[] = [
     {
@@ -86,8 +95,8 @@ const MealForm: React.FC<Props> = () => {
       label: "Drink",
       type: "checkbox",
       options: [
-        {value: "Water", label: "Water"},
-        {value: "Milk", label: "Milk"},
+        {value: "water", label: "Water"},
+        {value: "milk", label: "Milk"},
       ],
       required: false
     },
@@ -100,11 +109,12 @@ const MealForm: React.FC<Props> = () => {
   ]
 
   const handleSubmit = (
-    payload: MealDetails
+    payload: MealDetails,
+    {resetForm}: {resetForm: () => void}
   ) => {
 
     dispatch({ type: "app/ADD_MEAL", payload: payload})
-    router.push("/")
+    resetForm()
   }
 
   return (
@@ -136,7 +146,7 @@ const MealForm: React.FC<Props> = () => {
                         field={field.field} 
                         label={field.label} 
                         options={field.options} 
-                        time={values.time || new Date().toString()}
+                        time={`${values.time}` || new Date().toString()}
                       />
                     )
                   } else if (field.type === "checkbox") {

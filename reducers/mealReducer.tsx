@@ -1,10 +1,13 @@
+import { SelectOption } from "../components/types/forms";
+
+export type Drink = {milk: boolean , water: boolean}
 export interface MealDetails {
-  date: string;
-  time: string;
-  meal: string;
+  date: Date;
+  time: Date;
+  meal: SelectOption;
   //food: string[];
   food: string;
-  drink: "milk" | "water" | "";
+  drink: Drink;
   notes: string;
 }
 

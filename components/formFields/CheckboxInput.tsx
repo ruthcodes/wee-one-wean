@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import { SelectOption } from "../types/forms";
+import { useFormikContext } from "formik";
 
 interface CheckboxInputProps {
   field: string;
@@ -12,6 +13,16 @@ const CheckboxInput = function ({
   label,
   options
 } : CheckboxInputProps) {
+  const formikContext = useFormikContext()
+
+  const handleChange = (e: React.SyntheticEvent) => {
+    const nextState = {
+      ...formikContext.values[field],
+      [e.target.name]: e.target.checked
+    }
+    formikContext.setFieldValue(field, nextState)
+  }
+
   return (
     <div className="FormField CheckboxFormField">
       <label className="FormLabel">
@@ -22,9 +33,12 @@ const CheckboxInput = function ({
           options.map((o: SelectOption, i: number) => {
             return (
               <React.Fragment key={`check ${i}`}>
-                <input 
+                <input
+                  name={o.value}
                   type="checkbox"
                   id={o.value}
+                  onChange={(e) => handleChange(e)}
+                  checked={formikContext.values[field][o.value]}
                 />
                 <label className="CustomCheckbox" htmlFor={o.value}>
                   {o.label}
@@ -34,8 +48,6 @@ const CheckboxInput = function ({
           })
         }
       </div>
-      
-      
     </div>
   )
 }
