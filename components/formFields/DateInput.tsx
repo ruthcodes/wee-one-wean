@@ -24,7 +24,7 @@ const DateInput = function ({
           className="FormInput" 
           timeFormat={time} 
           dateFormat={!time}
-          value={new Date()}
+          value={formikContext.values[field]}
           onChange={(e) => formikContext.setFieldValue((field as any), e)}
         />
       </div>

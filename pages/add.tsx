@@ -13,6 +13,7 @@ import { DateInput } from "../components/formFields/DateInput";
 import { DropdownInput } from "../components/formFields/DropdownInput";
 import { CheckboxInput } from "../components/formFields/CheckboxInput";
 import { guessedMeal } from "../helpers";
+import { Autocomplete } from "../components/formFields/Autocomplete";
 
 type Props = {}
 
@@ -87,7 +88,7 @@ const MealForm: React.FC<Props> = () => {
     {
       field: "food",
       label: "Food",
-      type: "text",
+      type: "autocomplete",
       required: false
     },
     {
@@ -156,6 +157,14 @@ const MealForm: React.FC<Props> = () => {
                         field={field.field} 
                         label={field.label} 
                         options={field.options} 
+                      />
+                    )
+                  } else if (field.type === "autocomplete") {
+                    return (
+                      <Autocomplete
+                        key={i} 
+                        field={field.field} 
+                        label={field.label} 
                       />
                     )
                   } else {
