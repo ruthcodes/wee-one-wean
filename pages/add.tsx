@@ -19,7 +19,6 @@ type Props = {}
 
 const MealForm: React.FC<Props> = () => {
   const dispatch = useDispatch();
-  const router = useRouter();
   
   const validationSchema = Yup.object({
     date: Yup
@@ -48,7 +47,6 @@ const MealForm: React.FC<Props> = () => {
       .string()
   })
 
-
   const initialValues: MealDetails = {
     date: new Date(),
     time: new Date(),
@@ -57,8 +55,6 @@ const MealForm: React.FC<Props> = () => {
     drink: {milk: false, water: false},
     notes: ""
   }
-
-  
 
   const formFields: FormFieldObject[] = [
     {

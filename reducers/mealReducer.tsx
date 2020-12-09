@@ -1,6 +1,6 @@
 import { SelectOption } from "../components/types/forms";
 
-export type Drink = {milk: boolean , water: boolean}
+export interface Drink {milk: boolean , water: boolean}
 export interface MealDetails {
   date: Date;
   time: Date;
