@@ -14,6 +14,7 @@ import { DropdownInput } from "../components/formFields/DropdownInput";
 import { CheckboxInput } from "../components/formFields/CheckboxInput";
 import { guessedMeal } from "../helpers";
 import { Autocomplete } from "../components/formFields/Autocomplete";
+import { FoodItem, Opinion } from "../components/formFields/FoodList";
 
 type Props = {}
 
@@ -35,7 +36,17 @@ const MealForm: React.FC<Props> = () => {
       })
       .required("Please choose a meal"),
     food: Yup
-      .string()
+      .array()
+      .of(
+        Yup
+          .object<FoodItem>()
+          .shape({
+            label: Yup.string(),
+            value: Yup.string(),
+            amount: Yup.string(),
+            opinion: Yup.string<Opinion>()
+          })
+      )
       .required("Please enter a food"),
     drink: Yup
       .object()
@@ -51,7 +62,7 @@ const MealForm: React.FC<Props> = () => {
     date: new Date(),
     time: new Date(),
     meal: guessedMeal(new Date()),
-    food: "",
+    food: [],
     drink: {milk: false, water: false},
     notes: ""
   }
@@ -109,7 +120,7 @@ const MealForm: React.FC<Props> = () => {
     payload: MealDetails,
     {resetForm}: {resetForm: () => void}
   ) => {
-
+    
     dispatch({ type: "app/ADD_MEAL", payload: payload})
     resetForm()
   }
@@ -157,11 +168,14 @@ const MealForm: React.FC<Props> = () => {
                     )
                   } else if (field.type === "autocomplete") {
                     return (
-                      <Autocomplete
-                        key={i} 
-                        field={field.field} 
-                        label={field.label} 
-                      />
+                      <React.Fragment key={i}>
+                        <Autocomplete
+                          key={i} 
+                          field={field.field} 
+                          label={field.label} 
+                        />
+                      </React.Fragment>
+                      
                     )
                   } else {
                     return (

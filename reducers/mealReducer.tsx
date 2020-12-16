@@ -1,12 +1,12 @@
 import { SelectOption } from "../components/types/forms";
+import { FoodItem } from "../components/formFields/FoodList";
 
 export interface Drink {milk: boolean , water: boolean}
 export interface MealDetails {
   date: Date;
   time: Date;
   meal: SelectOption;
-  //food: string[];
-  food: string;
+  food: FoodItem[];
   drink: Drink;
   notes: string;
 }
@@ -16,7 +16,7 @@ export type MealState = {
 }
 
 const initialState: MealState = {
-  meals: []
+  meals: [],
 }
 
 const ADD_MEAL = "app/ADD_MEAL";

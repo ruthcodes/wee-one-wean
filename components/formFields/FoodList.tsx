@@ -1,6 +1,7 @@
 import React from "react";
+import { useField } from "formik";
 
-type Opinion = "positive" | "negative" | "neutral";
+export type Opinion = "positive" | "negative" | "neutral";
 
 export interface FoodItem {
   label: string;
@@ -21,8 +22,9 @@ const FoodItem: React.FC<ItemProps> = ({ item }) => {
 
 type ListProps = {
   foodItems: FoodItem[],
+  fieldName: string;
 }
-const FoodList: React.FC<ListProps> = ({ foodItems }) => {
+const FoodList: React.FC<ListProps> = ({ foodItems, fieldName }) => {
   return (
     <div className="FoodListContainer">
       {
