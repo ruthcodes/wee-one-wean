@@ -9,7 +9,7 @@ const initialState: NavState = {
 const TOGGLE_NAV = "app/TOGGLE_NAV";
 
 export type NavAction = 
-  | {
+  {
     type: typeof TOGGLE_NAV;
   };
 
