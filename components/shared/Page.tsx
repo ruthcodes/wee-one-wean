@@ -14,7 +14,8 @@ type Props = {
 const Page: React.FC<Props> = ({ children, title }) => {
   const {
     //toast,
-    nav
+    nav,
+    modal
   } = useStore();
 
   const dispatch = useDispatch();
@@ -59,6 +60,12 @@ const Page: React.FC<Props> = ({ children, title }) => {
           <img src={cancel} className="Close" alt="Cancel" />
         </div>
         <Navigation />
+      </div>
+
+      <div className={`Modal ${modal.modalOpen ? 'Open' : ''}`}>
+        <div className="Cancel" onClick={() => dispatch({ type: "app/TOGGLE_MODAL"})}>
+          <img src={cancel} className="Close" alt="Cancel" />
+        </div>
       </div>
           
  
