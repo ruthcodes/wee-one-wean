@@ -9,32 +9,35 @@ interface AutocompleteProps {
   label: string;
 }
 
-interface Suggestion {
-  label: string;
-  value: string;
-}
-
 // this will come from API
-const suggestions: Suggestion[] = [
+const suggestions: FoodItem[] = [
   {
     label: "Sweet potato",
-    value: "sweet potato"
+    value: "sweet potato",
+    amount: "",
+    opinion: "neutral",
   },
   {
     label: "Carrot",
-    value: "carrot"
+    value: "carrot",
+    amount: "",
+    opinion: "neutral",
   },
   {
     label: "Squash",
-    value: "squash"
+    value: "squash",
+    amount: "",
+    opinion: "neutral",
   },
   {
     label: "Potato",
-    value: "potato"
+    value: "potato",
+    amount: "",
+    opinion: "neutral",
   },
 ]
 
-const getSuggestions = function (userInput: string): Suggestion[] {
+const getSuggestions = function (userInput: string): FoodItem[] {
   const value = userInput.trim().toLowerCase();
   const valueLength = value.length;
 
@@ -50,7 +53,7 @@ const getSuggestions = function (userInput: string): Suggestion[] {
 
 // populate input based on selected suggestion
 const getSuggestionValue = (
-  suggestion: Suggestion,
+  suggestion: FoodItem,
   formikContext: FormikContextType<FormikValues>,
   field: string
 ) => {
@@ -64,7 +67,7 @@ const getSuggestionValue = (
   )
 }
 
-const renderSuggestion = (suggestion: Suggestion) => (
+const renderSuggestion = (suggestion: FoodItem) => (
   <div>{suggestion.label}</div>
 )
 
@@ -75,7 +78,7 @@ const Autocomplete = ({
   const formikContext = useFormikContext();
   
   const [val, setVal] = useState<string>("");
-  const [suggestions, setSuggestions] = useState<Suggestion[]>([])
+  const [suggestions, setSuggestions] = useState<FoodItem[]>([])
 
   const handleChange = (
     e: React.SyntheticEvent, 
@@ -91,14 +94,14 @@ const Autocomplete = ({
 
   const onSuggestionsClearRequested = () => setSuggestions([])
 
-  const inputProps: InputProps<Suggestion> = {
+  const inputProps: InputProps<FoodItem> = {
     value: val,
     onChange: handleChange,
   }
 
   // custom onChangeHandler due to issue with @types
   // https://stackoverflow.com/questions/61785523/autosuggest-renderinputcomponent-inputprops-types-of-property-onchange-are-i
-  const renderInputComponent = (inputProps: InputProps<Suggestion>): React.ReactNode => {
+  const renderInputComponent = (inputProps: InputProps<FoodItem>): React.ReactNode => {
 
     const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement>): void => {
       inputProps.onChange(event, { newValue: event.target.value, method: 'type' });
@@ -109,10 +112,12 @@ const Autocomplete = ({
         e.preventDefault();
         const currentVal = [...formikContext.values[field]];
         if (currentVal.find(e => e.value === inputProps.value) === undefined){
-          // create suggestion object from user input
+          // create food item object from user input
           let sugObj = {
             label: inputProps.value,
             value: inputProps.value,
+            amount: "",
+            opinion: "neutral",
           }
           formikContext.setFieldValue(field, [...currentVal, sugObj]);
           // clear input field after option added to food list
@@ -140,16 +145,17 @@ const Autocomplete = ({
           suggestions={suggestions}
           onSuggestionsFetchRequested={onSuggestionsFetchRequested}
           onSuggestionsClearRequested={onSuggestionsClearRequested}
-          getSuggestionValue={(v: Suggestion) => getSuggestionValue(v, formikContext, field)}
+          getSuggestionValue={(v: FoodItem) => getSuggestionValue(v, formikContext, field)}
           renderSuggestion={renderSuggestion}
           inputProps={inputProps}
           renderInputComponent={renderInputComponent}
         />
-        {
-          formikContext.values[field] &&
+        
+      </div>
+      {
+          formikContext.values[field] .length > 0 &&
           <FoodList foodItems={formikContext.values[field]} fieldName={field}/>
         }
-      </div>
     </div>
   )
 }

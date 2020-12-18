@@ -8,6 +8,7 @@
     display: flex;
     justify-content: space-between;
     margin-bottom: 5px;
+    flex-flow:  row wrap;
     //height: 50px;
 
     .FormInputContainer {
@@ -221,4 +222,41 @@
 
 .react-autosuggest__suggestion--highlighted {
   background-color: #ddd;
+}
+
+
+.FoodListContainer {
+  border: 1px solid $Color4;
+  border-radius: 5px;
+  margin-top: 10px;
+  font-size: 1em;
+  width: 100%;
+
+  .FoodListHeader {
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px;
+    border-bottom: 1px solid $Color4;
+    
+  .FoodListHeaderItem {
+      padding: 5px 10px;
+
+      &:first-child {
+        border-right: 1px solid $Color4;
+      }
+
+      &:last-child {
+        padding-right: 0px;
+      }
+    }
+  }
+
+  .FoodItem {
+    padding: 10px;
+    display: flex;
+
+    .FoodItemName {
+      margin-right: auto;
+    }
+  }
 }
