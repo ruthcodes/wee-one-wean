@@ -102,3 +102,33 @@ input {
     }
   }
 }
+
+.Modal {
+  width: 80%;
+  height: 70%;
+  background-color: $Color1;
+  position: fixed;
+  top: 15%;
+  left: 10%;
+  z-index: 1000;
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: none;
+  flex-direction: column;
+  padding: 20px 20px 40px 30px;
+  box-sizing: border-box;
+
+  &.Open {
+    display: flex;
+  }
+
+  .Cancel {
+    margin-left: auto;
+
+    .Close {
+      padding: 0;
+      height: 20px;
+      width: 20px;
+    }
+  }
+}

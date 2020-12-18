@@ -46,11 +46,16 @@ const Page: React.FC<Props> = ({ children, title }) => {
       </main>
 
       <div
-          className={`BodyOverlay ${nav.navOpen ? 'Visible' : ''}`}
+          className={`BodyOverlay ${nav.navOpen || modal.modalOpen ? 'Visible' : ''}`}
           onClick={() => {
             if (nav.navOpen) {
               dispatch({
                 type: "app/TOGGLE_NAV"
+              })
+            }
+            if (modal.modalOpen) {
+              dispatch({
+                type: "app/TOGGLE_MODAL"
               })
             }
           }}>
