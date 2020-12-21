@@ -1,4 +1,4 @@
-import { SelectOption } from "../components/types/forms";
+import { SelectOption } from "../types/forms";
 import { FoodItem } from "../components/formFields/FoodList";
 
 export interface Drink {milk: boolean , water: boolean}

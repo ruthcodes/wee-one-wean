@@ -3,6 +3,12 @@ export interface SelectOption {
   label: string;
 }
 
+export interface SelectOptionIcon {
+  value: string;
+  label: string;
+  icon: string;
+}
+
 export interface FormFieldObject {
   field: string;
   label: string;

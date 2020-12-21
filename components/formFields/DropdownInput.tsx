@@ -1,9 +1,8 @@
 import React from "react";
 import Select from 'react-select';
 import { useFormikContext } from "formik";
-import { SelectOption } from "../types/forms";
+import { SelectOption } from "../../types/forms";
 import { guessedMeal } from "../../helpers";
-
 
 
 type DropdownInputProps = {

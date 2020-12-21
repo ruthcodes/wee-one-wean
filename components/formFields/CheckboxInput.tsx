@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { SelectOption } from "../types/forms";
+import { SelectOption } from "../../types/forms";
 import { useFormikContext } from "formik";
 
 interface CheckboxInputProps {

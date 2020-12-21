@@ -8,7 +8,7 @@ import { useDispatch } from "./_app";
 import { useRouter } from "next/router";
 import { TextInput } from "../components/formFields/TextInput";
 import { MealDetails } from "../reducers/mealReducer";
-import { FormFieldObject } from "../components/types/forms";
+import { FormFieldObject } from "../types/forms";
 import { DateInput } from "../components/formFields/DateInput";
 import { DropdownInput } from "../components/formFields/DropdownInput";
 import { CheckboxInput } from "../components/formFields/CheckboxInput";
