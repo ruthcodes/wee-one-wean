@@ -132,3 +132,27 @@ input {
     }
   }
 }
+
+.Btn {
+  background: $Color6;
+  color: $Color1;
+  border-radius: 50%;
+  border: none;
+  padding: 10px;
+  font-size: 1em;
+  letter-spacing: .1em;
+  cursor: pointer;
+}
+
+.BtnRound {
+  height: 40px;
+  width: 40px;
+  font-size: 1.5em;
+  line-height: 10px;
+  padding-left: 13px;
+}
+
+.BtnCancel {
+  background: $Color7;
+  transform: rotate(-45deg);
+}

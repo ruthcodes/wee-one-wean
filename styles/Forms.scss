@@ -232,28 +232,10 @@
   font-size: 1em;
   width: 100%;
 
-  .FoodListHeader {
-    display: flex;
-    justify-content: flex-end;
-    padding: 10px;
-    border-bottom: 1px solid $Color4;
-    
-  .FoodListHeaderItem {
-      padding: 5px 10px;
-
-      &:first-child {
-        border-right: 1px solid $Color4;
-      }
-
-      &:last-child {
-        padding-right: 0px;
-      }
-    }
-  }
-
   .FoodItem {
     padding: 10px;
     display: flex;
+    align-items: center;
 
     .FoodItemName {
       margin-right: auto;
