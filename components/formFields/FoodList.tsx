@@ -153,7 +153,6 @@ type ItemProps = {
 }
 
 const FoodItem: React.FC<ItemProps> = ({ item, field }) => {
-  const dispatch = useDispatch();
   const formikContext = useFormikContext();
 
   const handleChange = (e: React.MouseEvent) => {
@@ -166,16 +165,6 @@ const FoodItem: React.FC<ItemProps> = ({ item, field }) => {
     <div className="FoodItem">
       <div className="FoodItemName">{item.label}</div>
       <div className="FoodItemAmount">
-        {/* {item.amount || 
-          <button 
-            className="Btn BtnRound" 
-            title="Add amount" 
-            onClick={(e: React.MouseEvent) => {
-              e.preventDefault();
-              dispatch({ type: "app/TOGGLE_MODAL"})
-            }}>+
-          </button>
-        } */}
         <Amount formik={formikContext} field={field} item={item}/>
       </div>
 
