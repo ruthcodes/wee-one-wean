@@ -44,6 +44,7 @@ const MealForm: React.FC<Props> = () => {
             label: Yup.string(),
             value: Yup.string(),
             amount: Yup.string(),
+            amountMeasurement: Yup.string(),
             opinion: Yup.string<Opinion>()
           })
       )

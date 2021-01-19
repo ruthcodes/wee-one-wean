@@ -15,24 +15,28 @@ const suggestions: FoodItem[] = [
     label: "Sweet potato",
     value: "sweet potato",
     amount: "",
+    amountMeasurement: {value: "grams", label: "g"},
     opinion: "neutral",
   },
   {
     label: "Carrot",
     value: "carrot",
     amount: "",
+    amountMeasurement: {value: "grams", label: "g"},
     opinion: "neutral",
   },
   {
     label: "Squash",
     value: "squash",
     amount: "",
+    amountMeasurement: {value: "grams", label: "g"},
     opinion: "neutral",
   },
   {
     label: "Potato",
     value: "potato",
     amount: "",
+    amountMeasurement: {value: "grams", label: "g"},
     opinion: "neutral",
   },
 ]
@@ -117,6 +121,7 @@ const Autocomplete = ({
             label: inputProps.value,
             value: inputProps.value,
             amount: "",
+            amountMeasurement: {value: "grams", label: "g"},
             opinion: "neutral",
           }
           formikContext.setFieldValue(field, [...currentVal, sugObj]);

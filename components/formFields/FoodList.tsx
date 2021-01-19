@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch } from "../../pages/_app";
 import Select, { components } from 'react-select';
-import { SelectOptionIcon } from "../../types/forms";
+import { SelectOption, SelectOptionIcon } from "../../types/forms";
 
 import { FormikContextType, FormikValues, useFormikContext } from "formik";
 
@@ -59,9 +59,22 @@ type OpinionProps = {
   item: FoodItem
 }
 
+
+
+function updateFormikValue( formik:FormikContextType<FormikValues>, field: string, item: FoodItem, varToUpdate: string, updateValue: any ){
+  const currentFormikVals: FoodItem[] = [...formik.values[field]];
+  const indexToUpdate = currentFormikVals.findIndex((i) => i.value === item.value)
+  const itemToUpdate = currentFormikVals[indexToUpdate]
+
+  itemToUpdate[varToUpdate] = updateValue;
+
+  currentFormikVals[indexToUpdate] = itemToUpdate;
+  formik.setFieldValue(field, currentFormikVals)
+}
+
 const Opinion: React.FC<OpinionProps> = ({ formik, field, item }) => {
 
-  const handleChange = (e: SelectOptionIcon) => {
+  /* const handleChange = (e: SelectOptionIcon) => {
 
     const currentFormikVals: FoodItem[] = [...formik.values[field]];
     const indexToUpdate = currentFormikVals.findIndex((i) => i.value === item.value)
@@ -72,13 +85,16 @@ const Opinion: React.FC<OpinionProps> = ({ formik, field, item }) => {
     currentFormikVals[indexToUpdate] = itemToUpdate;
     formik.setFieldValue(field, currentFormikVals)
 
-  }
+  } */
   const initialOpinion = opinions.find((v: SelectOptionIcon) => v.value === item.opinion);
   return (
     <Select 
       defaultValue={initialOpinion}
       options={opinions}
-      onChange={handleChange}
+      onChange={
+        (e: SelectOptionIcon) => 
+          updateFormikValue(formik, field, item, "opinion", e.value as Opinion)
+      }
       isSearchable={false}
       styles={customStyles}
       components={{ Option: IconOption, SingleValue: IconSingleValue }}
@@ -86,11 +102,48 @@ const Opinion: React.FC<OpinionProps> = ({ formik, field, item }) => {
   )
 }
 
+const measurements: SelectOption[] = [
+  {label: "g", value: "grams"},
+  {label: "tbsp", value: "tablespoons"},
+  {label: "tsp", value: "teaspoons"},
+  {label: "whole", value: "whole"},
+]
+
+
+const Amount: React.FC<OpinionProps> = ({formik, field, item}) => {
+  // updates amount attribute in food item
+  // take value from input and combine with select option value before setting formik field value (as string)
+  return (
+    <div className="AmountContainer">
+      <input 
+        type={"text"}
+        className={`FormInput`}
+        onChange={
+          (e) => 
+            //console.log(e)
+            updateFormikValue(formik, field, item, "amount", e.target.value)
+        }
+        value={formik.values[field].opinion}
+      />
+      <Select 
+        options={measurements}
+        isSearchable={false}
+        onChange={
+          (e: SelectOption) => 
+            updateFormikValue(formik, field, item, "amountMeasurement", e)
+        }
+        className={"AmountSelectContainer"}
+        placeholder={"..."}
+      />
+    </div>
+  )
+}
 
 export interface FoodItem {
   label: string;
   value: string;
   amount: string;
+  amountMeasurement: SelectOption;
   opinion: Opinion;
 }
 
@@ -113,7 +166,7 @@ const FoodItem: React.FC<ItemProps> = ({ item, field }) => {
     <div className="FoodItem">
       <div className="FoodItemName">{item.label}</div>
       <div className="FoodItemAmount">
-        {item.amount || 
+        {/* {item.amount || 
           <button 
             className="Btn BtnRound" 
             title="Add amount" 
@@ -122,7 +175,8 @@ const FoodItem: React.FC<ItemProps> = ({ item, field }) => {
               dispatch({ type: "app/TOGGLE_MODAL"})
             }}>+
           </button>
-        }
+        } */}
+        <Amount formik={formikContext} field={field} item={item}/>
       </div>
 
       <div className="FoodItemOpinion">
