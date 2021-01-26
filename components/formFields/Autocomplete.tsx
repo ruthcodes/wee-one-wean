@@ -1,4 +1,4 @@
-import { useFormikContext, FormikContextType, FormikValues, setNestedObjectValues } from 'formik';
+import { useFormikContext, FormikContextType, FormikValues, useField } from 'formik';
 import { useState, useRef, MutableRefObject, useEffect } from 'react';
 import Autosuggest, { InputProps, SuggestionsFetchRequestedParams } from 'react-autosuggest';
 import FoodList, { FoodItem } from './FoodList';
@@ -14,28 +14,28 @@ const suggestions: FoodItem[] = [
   {
     label: "Sweet potato",
     value: "sweet potato",
-    amount: "",
+    amount: "1",
     amountMeasurement: {value: "grams", label: "g"},
     opinion: "neutral",
   },
   {
     label: "Carrot",
     value: "carrot",
-    amount: "",
+    amount: "1",
     amountMeasurement: {value: "grams", label: "g"},
     opinion: "neutral",
   },
   {
     label: "Squash",
     value: "squash",
-    amount: "",
+    amount: "1",
     amountMeasurement: {value: "grams", label: "g"},
     opinion: "neutral",
   },
   {
     label: "Potato",
     value: "potato",
-    amount: "",
+    amount: "1",
     amountMeasurement: {value: "grams", label: "g"},
     opinion: "neutral",
   },
@@ -76,11 +76,12 @@ const renderSuggestion = (suggestion: FoodItem) => (
 )
 
 const Autocomplete = ({
-  field,
-  label
+  field: myField,
+  label,
 }: AutocompleteProps) => {
   const formikContext = useFormikContext();
-  
+  const [, meta, ] = useField(myField);
+  const error = meta.touched && meta.error;
   const [val, setVal] = useState<string>("");
   const [suggestions, setSuggestions] = useState<FoodItem[]>([])
 
@@ -114,17 +115,17 @@ const Autocomplete = ({
     const submitHandler = (e:React.KeyboardEvent) => {
       if (e.key === 'Enter'){
         e.preventDefault();
-        const currentVal = [...formikContext.values[field]];
+        const currentVal = [...formikContext.values[myField]];
         if (currentVal.find(e => e.value === inputProps.value) === undefined){
           // create food item object from user input
           let sugObj = {
             label: inputProps.value,
             value: inputProps.value,
-            amount: "",
+            amount: "1",
             amountMeasurement: {value: "grams", label: "g"},
             opinion: "neutral",
           }
-          formikContext.setFieldValue(field, [...currentVal, sugObj]);
+          formikContext.setFieldValue(myField, [...currentVal, sugObj]);
           // clear input field after option added to food list
           setVal("");
         }
@@ -145,21 +146,21 @@ const Autocomplete = ({
       <label className="FormLabel">
         {label}:
       </label>
-      <div className="FormInputContainer FormInputContainerSub">
+      <div className={`FormInputContainer FormInputContainerSub ${error ? 'InputError' : ''}`}>
         <Autosuggest 
           suggestions={suggestions}
           onSuggestionsFetchRequested={onSuggestionsFetchRequested}
           onSuggestionsClearRequested={onSuggestionsClearRequested}
-          getSuggestionValue={(v: FoodItem) => getSuggestionValue(v, formikContext, field)}
+          getSuggestionValue={(v: FoodItem) => getSuggestionValue(v, formikContext, myField)}
           renderSuggestion={renderSuggestion}
           inputProps={inputProps}
           renderInputComponent={renderInputComponent}
         />
-        
+        {error && <div className="ErrorMsg">{meta.error}</div>}
       </div>
       {
-          formikContext.values[field] .length > 0 &&
-          <FoodList foodItems={formikContext.values[field]} fieldName={field}/>
+          formikContext.values[myField] .length > 0 &&
+          <FoodList foodItems={formikContext.values[myField]} fieldName={myField}/>
         }
     </div>
   )

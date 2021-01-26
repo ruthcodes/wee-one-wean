@@ -28,7 +28,7 @@
   
         &.InputError {
           border: 1px solid $Color7;
-          background: $Color8;
+          background: $Color8; 
         }
       }
 
@@ -42,6 +42,18 @@
         font-size: 0.8em;
         color: $Color7;
         margin-top: 2px;
+      }
+
+      &.InputError {
+        .react-autosuggest__container {
+          border: 1px solid $Color7;
+          background: $Color8;
+          
+         .react-autosuggest__input {
+          background: $Color8;
+         } 
+          
+        }
       }
     }
 
@@ -258,6 +270,10 @@
           min-width: 100px;
         }
       }
+    }
+
+    .FoodItemOpinion {
+      min-width: 53px;
     }
   }
 }

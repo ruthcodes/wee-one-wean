@@ -123,7 +123,7 @@ const Amount: React.FC<OpinionProps> = ({formik, field, item}) => {
             //console.log(e)
             updateFormikValue(formik, field, item, "amount", e.target.value)
         }
-        value={formik.values[field].opinion}
+        value={formik.values[field].find((i:FoodItem) => i.value === item.value).amount}
       />
       <Select 
         options={measurements}
@@ -134,6 +134,7 @@ const Amount: React.FC<OpinionProps> = ({formik, field, item}) => {
         }
         className={"AmountSelectContainer"}
         placeholder={"..."}
+        value={formik.values[field].find((i:FoodItem) => i.value === item.value).amountMeasurement}
       />
     </div>
   )
