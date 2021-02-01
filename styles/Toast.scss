@@ -1,0 +1,32 @@
+.Toast {
+  position: fixed;
+  top: -100px;
+  left: 50%;
+  transform: translateX(-50%);
+  transition: top 0.5s ease-in-out;
+  display: flex;
+  align-items: center;
+  padding: 0px 10px;
+  height: 40px;
+  width: 280px;
+  border-radius: 5px;
+  background:$Color6;
+  color: $Color2;
+
+  &.Show {
+    top: 20px;
+  }
+
+  .ToastContent {
+    display: flex;
+    justify-content: flex-start;
+    flex-basis: 100%;
+
+    .ToastClose {
+      height: 20px;
+      width:20px;
+      margin-left: auto;
+    }
+  }
+
+}

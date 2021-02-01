@@ -15,11 +15,14 @@ import { CheckboxInput } from "../components/formFields/CheckboxInput";
 import { guessedMeal } from "../helpers";
 import { Autocomplete } from "../components/formFields/Autocomplete";
 import { FoodItem, Opinion } from "../components/formFields/FoodList";
+import useToast from "../hooks/useToast";
 
 type Props = {}
 
 const MealForm: React.FC<Props> = () => {
   const dispatch = useDispatch();
+  const displayToast = useToast();
+  
   
   const validationSchema = Yup.object({
     date: Yup
@@ -121,8 +124,9 @@ const MealForm: React.FC<Props> = () => {
     payload: MealDetails,
     {resetForm}: {resetForm: () => void}
   ) => {
-    
     dispatch({ type: "app/ADD_MEAL", payload: payload})
+    dispatch({ type: "app/SET_TOAST_MESSAGE", payload: "Form Submitted"})
+    displayToast();
     resetForm()
   }
 

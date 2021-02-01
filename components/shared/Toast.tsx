@@ -23,7 +23,7 @@ const Toast: React.FC<Props> = ({ message, visible }) => {
       <div className={`Toast ${visible ? 'Show' : ''}`}>
         <div className="ToastContent">
           <div className="ToastMessage">{message}</div>
-          <img src={cancel} onClick={acknowledge} alt="Close popup" />
+          <img className="ToastClose" src={cancel} onClick={acknowledge} alt="Close popup" />
         </div>
       </div>
     </CSSTransition>

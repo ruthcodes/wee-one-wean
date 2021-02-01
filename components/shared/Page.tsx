@@ -1,7 +1,7 @@
 import React, { ReactElement, useEffect, useState } from "react";
 import Router from "next/router";
 import { useStore, useDispatch } from "../../pages/_app";
-//import Toast from "./Toast";
+import Toast from "./Toast";
 import Header from "./Header";
 import cancel from "../../assets/cancel.svg";
 import Navigation from "./Navigation";
@@ -13,7 +13,7 @@ type Props = {
 
 const Page: React.FC<Props> = ({ children, title }) => {
   const {
-    //toast,
+    toast,
     nav,
     modal
   } = useStore();
@@ -76,7 +76,7 @@ const Page: React.FC<Props> = ({ children, title }) => {
  
     </div>
       
-    {/*<Toast message={toast.toastMessage} visible={toast.toastVisible} />  */}
+    <Toast message={toast.toastMessage} visible={toast.toastVisible} /> 
     </>
   )
 }
